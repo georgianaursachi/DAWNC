@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ant Colony Behavior Simulator">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antvior</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="fonts/lato.css">
+    <link rel="stylesheet" href="fonts/roboto.css">
+    <link rel="stylesheet" href="style-main.css">
+    <link rel="stylesheet" href="fonts/font-awesome-4.7.0/css/font-awesome.css">
+
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="images/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicons/favicon-16x16.png">
+    <link rel="manifest" href="images/favicons/manifest.json">
+    <link rel="mask-icon" href="images/favicons/safari-pinned-tab.svg" color="#0e3039">
+    <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+    <div class="loading" id="loading">
+        <div class="progress" id="progress"></div>
+    </div>
+    <input type="checkbox" id="drawer-toggle" name="drawer-toggle" />
+    <label for="drawer-toggle" id="drawer-toggle-label"></label>
+    <nav id="drawer">
+        <ul>
+            <li><a href="about.html">About ants</a></li>
+            <li><a href="#">Load existing state</a></li>
+        </ul>
+    </nav>
+    <div class="content" style="height: 100%; width: 100%;">
+        <h1 class="main-title" id="main-title">Ant Colony Behavior Simulator</h1>
+        <a href="simulator.html" class="btn-cont btn btn-simulation" id="start">Start Simulation</a>
+    </div>
+
+    <div id="background">
+        <video src="videos/ants.mp4" id="bgvid" playsinline autoplay muted loop>
+        </video>
+        <img class="overlay" src="images/overlay-focus.png" />
+        <img class="overlay" src="images/overlay-vignette.png" />
+    </div>
+
+    <script type="text/javascript" src="main.js"></script>
+</body>
+
+</html>

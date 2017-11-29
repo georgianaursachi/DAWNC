@@ -1,0 +1,504 @@
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
+    /* adds animation for all transitions */
+    -webkit-transition: .25s ease-in-out;
+    -moz-transition: .25s ease-in-out;
+    -o-transition: .25s ease-in-out;
+    transition: .25s ease-in-out;
+    margin: 0;
+    padding: 0;
+    -webkit-text-size-adjust: none;
+}
+
+body,
+html,
+main {
+    /* important */
+    height: 100%;
+}
+
+.content {
+    width: 30%;
+    padding-left: 5em;
+    padding-top: 40vh;
+}
+
+.main-title {
+    display: block;
+    margin: 0 auto;
+    font-family: 'Lato', sans-serif;
+    font-weight: 200;
+    color: #fafafa;
+    font-size: 20px;
+    text-transform: uppercase;
+}
+
+.main-text {
+    font-family: 'Roboto', sans-serif;
+    color: #fafafa;
+    font-weight: 300;
+}
+
+#bgvid {
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: #0b0a0c;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    position: absolute;
+    float: left;
+    transition: 1s opacity;
+    transform-origin: top;
+    transition: transform 1s;
+    transform: scaleY(1);
+}
+
+.scrolling-bg {
+    min-height: 100%;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+    /* make scrollbar transparent */
+}
+
+.facts {
+    position: relative;
+    width: 100%;
+    background-color: #041027;
+    padding-left: 10em;
+    padding-right: 10em;
+    padding-top: 5em;
+    padding-bottom: 10em;
+}
+
+.facts-title {
+    font-family: 'Lato', sans-serif;
+    color: #fafafa;
+    font-size: 16px;
+    font-weight: bold;
+    display: inline-block;
+    padding-bottom: 20px;
+    position: relative;
+}
+
+.facts-title:before {
+    content: "";
+    position: absolute;
+    width: 50%;
+    height: 4px;
+    bottom: 0;
+    left: 0;
+    border-bottom: 4px solid #0fa8e2;
+}
+
+.facts-text {
+    font-family: 'Lato', sans-serif;
+    color: #718294;
+    font-size: 15px;
+    padding-top: 2em;
+    padding-bottom: 2em;
+}
+
+#hide {
+    position: relative;
+    height: 0;
+    width: 100%;
+    display: none;
+    padding-top: 3em;
+}
+
+.first-text {
+    padding-left: 18em;
+    padding-right: 18em;
+    padding-bottom: 5em;
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    color: #757575;
+}
+
+.video-container {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+}
+
+.infos {
+    width: 100%;
+    height: 150px;
+    background: transparent;
+    margin: auto;
+    padding: 10px;
+}
+
+.one {
+    width: 40%;
+    background: #0f2236;
+    float: left;
+    border: none;
+}
+
+.info-title {
+    font-family: 'Lato', sans-serif;
+    text-transform: uppercase;
+    padding-left: 1em;
+    color: #444;
+    padding-bottom: 2em;
+    padding-top: 1em;
+    font-size: 16px;
+}
+
+.info-text {
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-bottom: 2em;
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    color: #444;
+}
+
+.two {
+    width: 40%;
+    background: #0f2236;
+    float: right;
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translate3d(0, 100%, 0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@keyframes fadeInRight {
+    0% {
+        opacity: 0;
+        transform: translate3d(100%, 0, 0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+.scene_element--fadeinup {
+    animation-name: fadeInUp;
+    animation-duration: 2s;
+    transition-timing-function: ease-in;
+    animation-fill-mode: both;
+}
+
+.scene_element--fadeinup-lazy {
+    animation-name: fadeInUp;
+    animation-duration: 3s;
+    transition-timing-function: ease-in;
+    animation-fill-mode: both;
+}
+
+/** An element that fades in and slides from the right */
+
+.scene_element--fadeinright {
+    animation-name: fadeInRight;
+    animation-duration: 0.25s;
+    transition-timing-function: ease-in;
+    animation-fill-mode: both;
+}
+
+#drawer-toggle {
+    position: absolute;
+    opacity: 0;
+}
+
+#drawer-toggle-label {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    right: 45px;
+    top: 20px;
+    height: 5%;
+    width: 50px;
+    display: block;
+    position: fixed;
+    background: rgba(255, 255, 255, .0);
+    z-index: 20;
+    cursor: pointer;
+}
+
+/* adds our "hamburger" menu icon */
+
+#drawer-toggle-label:before {
+    content: '';
+    display: block;
+    position: absolute;
+    height: 2px;
+    width: 24px;
+    background: #fff;
+    right: 13px;
+    top: 18px;
+    box-shadow: 0 6px 0 #fff, 0 12px 0 #fff;
+}
+
+#drawer {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    height: 100%;
+    width: 300px;
+    background: #0b0a0c;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    padding: 20px;
+    -webkit-overflow-scrolling: touch;
+    z-index: 19;
+}
+
+#drawer-toggle:checked ~ #drawer-toggle-label {
+    background: transparent;
+    border: none;
+}
+
+#drawer-toggle:checked ~ #drawer-toggle-label {
+    right: 250px;
+}
+
+#drawer-toggle:checked ~ #drawer {
+    right: 0px;
+}
+
+#drawer-toggle:checked ~ #page-content {
+    margin-right: 0px;
+}
+
+/* Menu item styles */
+
+#drawer ul {
+    list-style-type: none;
+    padding-top: 80px;
+    margin-top: 50%;
+    display: flex;
+    align-items: left;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#drawer ul a {
+    display: block;
+    padding-bottom: 20px;
+    padding-left: 40px;
+    color: #FAFAFA;
+    text-decoration: none;
+    font-family: 'Lato', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: uppercase;
+    font-weight: bold;
+    display: block;
+    margin: 0 auto;
+}
+
+#drawer ul a:hover {
+    color: #00ACC1;
+}
+
+
+@media screen and (max-width: 400px) {
+    #drawer {
+        right: -100%;
+        width: 100%;
+    }
+
+    #drawer-toggle:checked ~ #drawer-toggle-label {
+        right: calc(100% - 50px);
+    }
+}
+
+@media screen and (max-width: 767px) {
+    #bgvid {
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+        background-color: #0b0a0c;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        position: absolute;
+        z-index: -1;
+        float: left;
+        transition: 1s opacity;
+        transform-origin: top;
+        transition: transform 1s;
+        transform: scaleY(1);
+    }
+
+    .content {
+        width: 80%;
+        padding-left: 0.5em;
+        display: block;
+        margin: 0 auto;
+        padding-top: 50vh;
+    }
+
+    .main-title {
+        display: block;
+        margin: 0 auto;
+        font-family: 'PT Sans', sans-serif;
+        font-weight: 300;
+        color: #fafafa;
+        font-size: 15px;
+    }
+
+    #drawer {
+        right: -70%;
+        width: 70%;
+        background-color: #0b0a0c;
+    }
+
+    #drawer-toggle-label {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        right: 15px;
+        top: 20px;
+        height: 5%;
+        width: 50px;
+        display: block;
+        position: fixed;
+        background: rgba(255, 255, 255, .0);
+        z-index: 20;
+        cursor: pointer;
+    }
+
+    #drawer-toggle:checked ~ #drawer-toggle-label {
+        right: 55%;
+    }
+
+    #drawer ul a {
+        display: block;
+        padding-bottom: 15px;
+        padding-left: 20px;
+        color: #FAFAFA;
+        text-decoration: none;
+        font-family: 'Lato', sans-serif;
+        font-size: 12px;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    #drawer ul a:hover {
+        color: transparent;
+    }
+
+    body,
+    html,
+    main {
+        /* important */
+        overflow-x: hidden;
+    }
+
+    .first-text {
+        padding-left: 5px;
+        padding-right: 5px;
+        padding-bottom: 1em;
+        font-family: 'Roboto', sans-serif;
+        font-size: 15px;
+        font-weight: 300;
+        color: #757575;
+    }
+
+    .facts {
+        position: relative;
+        width: 100%;
+        background-color: #041027;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-top: 2em;
+        padding-bottom: 2em;
+    }
+
+    .facts-title {
+        font-family: 'Lato', sans-serif;
+        color: #fafafa;
+        font-size: 16px;
+        font-weight: bold;
+        display: inline-block;
+        padding-bottom: 20px;
+        position: relative;
+    }
+
+
+    .facts-text {
+        font-family: 'Lato', sans-serif;
+        color: #718294;
+        font-size: 15px;
+        padding-top: 2em;
+        padding-bottom: 2em;
+    }
+
+    .infos {
+        width: 100%;
+        background: transparent;
+        margin: auto;
+        padding: 10px;
+    }
+
+    .one {
+        width: 100%;
+        background: #0f2236;
+        float: left;
+        border: none;
+        margin-bottom: 1em;
+    }
+
+    .info-title {
+        font-family: 'Lato', sans-serif;
+        text-transform: uppercase;
+        padding-left: 1em;
+        color: #444;
+        padding-bottom: 2em;
+        padding-top: 1em;
+        font-size: 16px;
+    }
+
+    .info-text {
+        padding-left: 1em;
+        padding-right: 1em;
+        padding-bottom: 2em;
+        font-family: 'Roboto', sans-serif;
+        font-size: 15px;
+        font-weight: 300;
+        color: #444;
+    }
+
+    .two {
+        width: 100%;
+        background: #0f2236;
+        float: right;
+        margin-bottom: 1em;
+    }
+
+}
