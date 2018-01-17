@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- saved from url=(0031)http://scholarly.vernacular.io/ -->
 <html lang="ro">
 
 <head>
@@ -119,7 +118,9 @@
                 </p>
             </aside>
             <p>
-                Un utilizator va putea folosi aplicația web onilne. El va porni simulatorul cu cel putin doua furnici, si va urmări evoluția societății de furnici. Va putea salva progresul la moment dat, fiind capabil sa îl reîncarce pentru a continua cu simulatorul din momentul in care l-a salvat.
+                Un utilizator va putea folosi aplicația web onilne. Acesta poate alege cu cate furnici sa inceapa simularea(valoarea fiind cuprinsa intre 1 si 120), mancarea furnicilor din colonie, precum si cata mancare va fi pe harta. In simulator se va putea urmări evoluția societății de furnici. In plus, userul mai poate sa interactioneze cu furnicile, si anume, sa adauge/elimine manual furnici si mancare. Utilizatorul mai poate urmari si urma de feromoni lasata de furnici pe harta. Furnicile au si un grad de frica vis-a-vis de pozitia cursorului.
+                
+                De asemena, utilizatorul se poate informa despre viata, temperamentul furnicilor in pagina dedicata acesteia.
             <p>
                Aplicația are rol educațional, fiind utila pentru studiul minimal al comportamentului unei societăți de furnici. 
             </p>
@@ -135,47 +136,99 @@
                 HTML5 este un limbaj pentru structurarea și prezentarea conținutului pentru World Wide Web. HTML5 introduce un număr de noi elemente și atribute care reflectă utilizarea tipică a unui site modern.
             </p>
             <p>
-                CSS (Cascading Style Sheets) este un standard pentru formatarea elementelor unui document HTML. CSS3 reprezintă un upgrade ce aduce câteva atribute noi și ajută la dezvoltarea noilor concepte in webdesign.
-            </p>
-            <h3>Javascript</h3>
-            <p>
-                JavaScript (JS) este un limbaj de programare orientat obiect bazat pe conceptul prototipurilor. Este folosit mai ales pentru introducerea unor funcționalități în paginile web, codul JavaScript din aceste pagini fiind rulat de către browser. Limbajul este binecunoscut pentru folosirea sa în construirea siturilor web.
-            </p>
-            <p>
-                Am ales să folosim Javascript deoarece: 
+                Am ales să folosim HTML5 deoarece: 
             </p>
             <ul>
-            <li>Aplicația noastră web se bazează pe modele 3D.</li>
-            <li>Permite importarea lor într-o pagina web, in mod simplu.</li>
-            <li>Facilitează animațiile.</li>
+            <li>interfața existentă document object model (DOM) este extinsă de fapt cu caracteristici noi, documentate. Sunt noi API-uri, cum ar fi elementul canvas pentru modul de desen 2D. (necesar pentru animarea furnicilor, plasarea mancarii pe harta, vizualizarea urmei de fermoni)</li>
+            <li>introduce un număr de noi elemente și atribute care reflectă utilizarea tipică a unui site modern.(cum ar fi &lt;div&gt; și de elemente inline (&lt;span&gt;), de exemplu &lt;nav&gt; - block de navigatie în site -, &lt;footer&gt;) </li>
             </ul>
-
-            <h3>Maya</h3>
             <p>
-               Maya este un program 3D de animație, modelare, simulare și randare. Util pentru animație, scene, grafică mișcare, realitate virtuală și crearea de caractere.
+                CSS (Cascading Style Sheets) este un standard pentru formatarea elementelor unui document HTML. CSS3 reprezintă un upgrade ce aduce câteva atribute noi și ajută la dezvoltarea noilor concepte in webdesign.
+            </p>
+            <center><img alt="css diagram" src="Scholarly%20HTML%20%E2%80%94%20Markedly%20Smart_files/css.png" style="width:60%; height:60%;"></center>
+            <p>Unul din marile plusuri ale CSS3 este modulul "Media queries", care faciliteaza scrierea usoara a codului pentru diferite tipuri de ecrane.</p>
+            <h3>Javascript</h3>
+            <p>
+                JavaScript (JS) este un limbaj de programare orientat obiect bazat pe conceptul prototipurilor. Este folosit mai ales pentru introducerea unor funcționalități în paginile web, codul JavaScript din aceste pagini fiind rulat de către browser. Limbajul este binecunoscut pentru folosirea sa în construirea site-urilor web.
             </p>
             <p>
-                Am ales să folosim Maya deoarece dorim sa redam cât mai bine realitatea, folosind modele 3D. De asemena, Maya facilitează animarea obiectelor. 
+                Am ales să folosim plain Javascript deoarece: 
             </p>
+            <ul>
+            <li>Este inteles de orice versiune de browser.</li>
+            <li>Faciliteaza manipularea elementelor DOM(Document Object Model), dar si "ascultarea" evenimentelor din cadrul paginei web, pentru a putea raspunde corespunzator.</li>
+            <li>Faciliteaza animatiile, dar si partea de algoritm a aplicatiei.(elemente de programare structurata/structuri de control: if, for, while, etc.)</li>
+            </ul>
+            <center><img alt="js speed" src="Scholarly%20HTML%20%E2%80%94%20Markedly%20Smart_files/plainjs.png"></center>
      
             <section id="file-headers">
                 <h3>Arhitectura aplicației</h3>
+                <h3>Front-end</h3>
+                <p>Site-ul este o suma de fisiere html, css si javascript.</p>
+                <center><img alt="front-end" src="Scholarly%20HTML%20%E2%80%94%20Markedly%20Smart_files/frontend.png"></center>
+                <p>Site-ul este responsive, fiind facilitata astfel vizualizarea lui pe mai multe device-uri/ecrane.(Folosind Media queries)</p>
+                <h4>Organizare fisiere:</h4>
+                <center><img alt="architecture" src="Scholarly%20HTML%20%E2%80%94%20Markedly%20Smart_files/architecture.png" style="width:50%; heoght:auto;"></center>
+                <h4>Furnicile</h4>
+                <p>Furnicile, mancarea si feromnonii sunt desenate pe un canvas(Element HTML5 folosit pentru a desena componente grafice intr-o pagina web).</p>
                 
+                <h3>Back-end</h3>
+                <p>Site-ul nu necesita parte de server(back-end development), deoarece toata aplicatia este realizata la nivel de client.</p>
                 
             </section>
             <section id="article">
                 <h3>Detalii de implementare</h3>
                 
-                
+                <h4>Furnica</h4>
+                <p>Miscarea: </p>
+                <code>
+                    var dir = Math.floor((Math.random() * 8) + 1);<br>
+		              var delay = Math.floor((Math.random() * 500));
+                </code>
+                <p>Ridica mancare:</p>
+                <code>
+                pickupFood: function() {<br>
+				this.hasFood = true;<br>
+				addClass(this.tile, 'hasFood');<br>
+			     }
+                </code>
+                <p>Livreaza mancarea:</p>
+                <code>
+                    dropFood: function() {<br>
+				this.hasFood = false;<br>
+				removeClass(this.tile,'hasFood');<br>
+				this.delivered ++;<br>
+			}
+                </code>
+                <p>O data ajunsa in punctul cu mancare sau musoroi furnicii i se schimba clasa, si actioneaza conform situatiei.</p>
+                <h4>Butoane:</h4>
+            <code>
+                var antButton = document.getElementById('antButton');<br>
+	antButton.addEventListener('click', function(evt) {<br>
+		removeClass(cf, 'circle_cursor');<br>
+		removeClass(cf, 'hand_cursor');<br>
+		var d = document.querySelectorAll('.panel button');<br>
+        var i;<br>
+        for (i = 0; i < d.length; ++i) {<br>
+          removeClass(d[i], 'active');<br>
+        }<br>
+		addClass(evt.target, 'active');<br>
+		toolMode = 'ant';<br>
+		console.log(toolMode);<br>
+	});
+            </code>
+            <p>Functionalitatea butoanelor este realizata tot in javascript cu ajutorul unui "eventListener"</p>
             </section>
+            
             <section id="hunk-elements">
-                <h3>Acțuni ale utilizatorului</h3>
+                <h3>Acțunile utilizatorului</h3>
                 <ol>
                 	<li>Citește informații despre furnici</li>
                     <li>Pornește simulatorul</li>
                     <li>Privește evoluția coloniei</li>
-                    <li>Salvează progresul</li>
-                    <li>Reîncarcă o stare anterioară, pentru a relua simularea</li>
+                    <li>Sterge/ adauga furnici</li>
+                    <li>Sterge/ adauga mancare</li>
+                    <li>Poate speria furnicile(cu ajutorul pozitiei cursorului)</li>
                 </ol>
                 
                 

@@ -1,6 +1,6 @@
 window.onbeforeunload = function () {
   window.scrollTo(0, 0);
-}
+};
 
 setTimeout(function () {
     document.getElementById('bgvid').style.webkitTransform = 'translateY(-5%)';

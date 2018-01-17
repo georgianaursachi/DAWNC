@@ -9,32 +9,25 @@ window.addEventListener("beforeunload", function () {
 
     function loadbar() {
         var ovrl = id("loading"),
-            prog = id("progress"),
-            img = document.images,
-            bg = id("background"),
+            video = document.getElementsByTagName("video"),
             c = 0;
-        tot = img.length;
-        if (tot == 0) return doneLoading();
+        var tot = video.length;
+        if (tot === 0) return doneLoading();
 
-        function imgLoaded() {
+        function vidLoaded() {
             c += 1;
             if (c === tot) return doneLoading();
         }
 
         function doneLoading() {
             setTimeout(function () {
-                document.getElementById('drawer-toggle-label').classList.add('scene_element--fadeinup');
                 document.getElementById('main-title').classList.add('scene_element--fadeinup');
                 document.getElementById('start').classList.add('scene_element--fadeinup-lazy');
                 ovrl.style.display = "none";
             }, 4000);
         }
-        for (var i = 0; i < tot; i++) {
-            var tImg = new Image();
-            tImg.onload = imgLoaded;
-            tImg.onerror = imgLoaded;
-            tImg.src = img[i].src;
-        }
+        
+        window.onload = vidLoaded;
     }
     document.addEventListener('DOMContentLoaded', loadbar, false);
 }());

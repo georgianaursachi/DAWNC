@@ -1,0 +1,954 @@
+html {
+    background: url(images/background/grass-2.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    position: fixed;
+}
+
+html,
+body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+
+.anthill-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+#anthill {
+    width: 40px;
+    height: auto;
+    margin-top: auto;
+    margin-bottom: 10px;
+}
+
+.loading {
+    background: #000 url('images/white-icon.png');
+    background-position: center 50%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 25vmin;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    z-index: 9999;
+    float: left;
+}
+
+.progress {
+    width: 400px;
+    max-width: 85vw;
+    height: 4px;
+    position: absolute;
+    bottom: 30vh;
+    left: 50%;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.5);
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+}
+
+.progress:after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 4px;
+    background: #fff;
+    animation: load 1s linear;
+}
+
+@-moz-keyframes load {
+    0% {
+        width: 0;
+    }
+    10% {
+        width: 5%;
+    }
+    20% {
+        width: 15%;
+    }
+    30% {
+        width: 25%;
+    }
+    40% {
+        width: 30%;
+    }
+    50% {
+        width: 44%;
+    }
+    60% {
+        width: 50%;
+    }
+    70% {
+        width: 72%;
+    }
+    80% {
+        width: 84%;
+    }
+    90% {
+        width: 92%;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+@-webkit-keyframes load {
+    0% {
+        width: 0;
+    }
+    10% {
+        width: 5%;
+    }
+    20% {
+        width: 15%;
+    }
+    30% {
+        width: 25%;
+    }
+    40% {
+        width: 30%;
+    }
+    50% {
+        width: 44%;
+    }
+    60% {
+        width: 50%;
+    }
+    70% {
+        width: 72%;
+    }
+    80% {
+        width: 84%;
+    }
+    90% {
+        width: 92%;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+@-o-keyframes load {
+    0% {
+        width: 0;
+    }
+    10% {
+        width: 5%;
+    }
+    20% {
+        width: 15%;
+    }
+    30% {
+        width: 25%;
+    }
+    40% {
+        width: 30%;
+    }
+    50% {
+        width: 44%;
+    }
+    60% {
+        width: 50%;
+    }
+    70% {
+        width: 72%;
+    }
+    80% {
+        width: 84%;
+    }
+    90% {
+        width: 92%;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+@keyframes load {
+    0% {
+        width: 0;
+    }
+    10% {
+        width: 5%;
+    }
+    20% {
+        width: 15%;
+    }
+    30% {
+        width: 25%;
+    }
+    40% {
+        width: 30%;
+    }
+    50% {
+        width: 44%;
+    }
+    60% {
+        width: 50%;
+    }
+    70% {
+        width: 72%;
+    }
+    80% {
+        width: 84%;
+    }
+    90% {
+        width: 92%;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+#drawer-toggle {
+    position: absolute;
+    opacity: 0;
+}
+
+#drawer-toggle-label,
+#drawer {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
+    /* adds animation for all transitions */
+    -webkit-transition: .25s ease-in-out;
+    -moz-transition: .25s ease-in-out;
+    -o-transition: .25s ease-in-out;
+    transition: .25s ease-in-out;
+    margin: 0;
+    padding: 0;
+    -webkit-text-size-adjust: none;
+}
+
+#drawer-toggle-label {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    right: 45px;
+    top: 5%;
+    height: 5%;
+    width: 50px;
+    display: block;
+    position: fixed;
+    background: rgba(255, 255, 255, .0);
+    z-index: 20;
+    cursor: pointer;
+    display: none;
+}
+
+/* adds our "hamburger" menu icon */
+
+#drawer-toggle-label:before {
+    content: '';
+    display: block;
+    position: absolute;
+    height: 2px;
+    width: 24px;
+    background: #fff;
+    right: 13px;
+    top: 18px;
+    box-shadow: 0 6px 0 #fff, 0 12px 0 #fff;
+}
+
+#drawer {
+    position: fixed;
+    bottom: 0;
+    right: -300px;
+    height: 100%;
+    width: 300px;
+    background: rgba(0, 0, 0, 0.7);
+    overflow-x: hidden;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    z-index: 19;
+}
+
+#drawer-toggle:checked ~ #drawer-toggle-label {
+    background: transparent;
+    border: none;
+}
+
+#drawer-toggle:checked ~ #drawer-toggle-label {
+    right: 250px;
+}
+
+#drawer-toggle:checked ~ #drawer {
+    right: 0px;
+}
+
+#drawer-toggle:checked ~ .header {
+    width: calc(100% - 330px);
+    transition: .25s ease-in-out;
+}
+
+#drawer-toggle:not(:checked) ~ .header {
+    transition: .25s ease-in-out;
+}
+
+#drawer-toggle:checked ~ #page-content {
+    margin-right: 0px;
+}
+
+/* Menu item styles */
+
+#drawer ul {
+    list-style-type: none;
+    padding-top: 80px;
+    margin-top: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding-left: 0;
+}
+
+#drawer ul a {
+    display: inline-block;
+    padding-bottom: 30px;
+    color: #BDBDBD;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    display: block;
+    margin: 0 auto;
+}
+
+#drawer ul a:hover {
+    color: #FAFAFA;
+}
+
+.overlay {
+    z-index: 0;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    float: left;
+}
+
+.settings-button {
+    position: absolute;
+    bottom: 2%;
+    margin-left: 11px;
+    background: transparent;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    z-index: 10;
+    color: rgba(255, 255, 255, .6);
+    display: none;
+}
+
+.settings-button:before {
+    font-family: FontAwesome;
+    content: '\f085';
+    font-size: 20px;
+}
+
+.settings-button:hover {
+    color: rgba(255, 255, 255, .9);
+    transition: .25s ease-in-out;
+}
+
+.panel {
+    background-color: rgba(0, 0, 0, 0.7);
+    height: 20%;
+    width: 15%;
+    border-radius: 5px;
+    position: absolute;
+    bottom: 6%;
+    margin-left: 4px;
+    z-index: 10;
+    display: none;
+    padding: 30px;
+}
+
+.ant-button, .food-button, .squish-button, .eraser-button { 
+    color: #BDBDBD;
+    border: none;
+    cursor: pointer;
+    display: block;
+    margin-bottom: 20px;
+    background: none;
+}
+
+.ant-button:hover, .food-button:hover, .squish-button:hover, .eraser-button:hover {
+    color: #FAFAFA;
+}
+
+.ant-button span, .food-button span, .squish-button span, .eraser-button span {
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    padding-left: 20px;
+}
+
+.ant-button:before {
+    font-family: FontAwesome;
+    content: '\f188';
+    font-size: 15px;
+}
+
+.food-button:before {
+    font-family: FontAwesome;
+    content: '\f06c';
+    font-size: 15px;
+}
+
+.squish-button:before {
+    font-family: FontAwesome;
+    content: '\f0a7';
+    font-size: 15px;
+}
+
+.eraser-button:before {
+    font-family: FontAwesome;
+    content: '\f12d';
+    font-size: 15px;
+}
+
+.cmn-toggle {
+    position: absolute;
+    visibility: hidden;
+}
+
+.cmn-toggle + label {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+    user-select: none;
+}
+
+input.cmn-toggle-round-flat + label {
+    /* width = 2*height or 2*border-radius */
+    padding: 2px;
+    width: 40px;
+    height: 20px;
+    border: 1px solid #dddddd;
+    border-radius: 60px;
+    transition: border-color 0.4s;
+}
+
+input.cmn-toggle-round-flat + label:before,
+input.cmn-toggle-round-flat + label:after {
+    display: block;
+    position: absolute;
+    content: "";
+}
+
+input.cmn-toggle-round-flat + label:after {
+    /* width = 2*border-radius */
+    top: 4px;
+    left: 4px;
+    bottom: 4px;
+    width: 10px;
+    background-color: #dddddd;
+    border-radius: 52px;
+    transition: margin 0.4s, background 0.4s;
+}
+
+input.cmn-toggle-round-flat:checked + label {
+    border-color: #00ACC1;
+}
+
+input.cmn-toggle-round-flat:checked + label:after {
+    /* margin-left = border-radius from 'input.cmn-toggle-round-flat + label' */
+    margin-left: 20px;
+    background-color: #00ACC1;
+}
+
+canvas {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: default;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+
+}
+
+#game {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    margin-top: 30px;
+    overflow: hidden;
+}
+
+#game.bg {
+    background: white url('../img/sand.jpg') repeat;
+}
+
+
+#scrollContainer {
+    position: absolute;
+    top: 5%;
+    width: 100%;
+    height: 95%;
+}
+
+
+#hill {
+    width: 30px;
+    height: auto;
+    margin-top: 3%;
+}
+
+.compass {
+    width: 36px;
+    height: 36px;
+    overflow: auto;
+}
+
+.compass div {
+    float: left;
+    background: white;
+    border: 1px solid #333;
+    width: 10px;
+    height: 10px;
+
+}
+
+.drawMode {
+    overflow: auto;
+}
+
+.header {
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    font-size: 13px;
+    text-align: left;
+    padding: 3px 15px 3px 15px;
+}
+
+.header span {
+    color: white;
+    display: inline-block;
+    font-family: 'Roboto', sans-serif;
+    font-size: 13px;
+    margin: 5px 0;
+    padding: 0 10px;
+    font-weight: bold;
+}
+
+.toolbar {
+    background: #80715d;
+    display: none;
+    width: 60px;
+    margin: 0 auto;
+    overflow: auto;
+    line-height: 60px;
+    position: absolute;
+    left: 0;
+    top: 30px;
+    bottom: 0;
+    transition: 0.2s;
+}
+
+.toolbar.hideleft {
+    left: -60px;
+}
+
+.toolbar h2 {
+    font: normal 10px/1.5 helvetica, arial, sans-serif;
+    color: #bbb;
+    margin-top: 20px;
+    margin-bottom: 0;
+}
+
+.toolbar button {
+    width: 44px;
+    display: block;
+    height: 44px;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    float: left;
+    margin-left: 7px;
+    margin-top: 7px;
+    margin-bottom: 7px;
+    outline: none;
+    cursor: pointer;
+    -webkit-transition: background-color .2s, border .2s;
+    transition: background-color .2s, border .2s;
+}
+
+.footer {
+    color: #60956a;
+    font-size: 12px;
+    line-height: 40px;
+}
+
+.deadhead,
+.babySprite {
+    position: absolute;
+}
+
+.gameover {
+    position: absolute;
+    top: 220px;
+    left: 320px;
+    width: 300px;
+    background: rgba(40, 40, 40, 0.9);
+    color: white;
+    padding: 40px;
+    border-radius: 25px;
+    display: none;
+
+}
+
+.gameover span {
+    color: #f5d20e;
+}
+
+.toolbar button.active,
+.toolbar button.active:hover {
+    background-color: #6d604f !important;
+    border-color: #635748;
+}
+
+.toolbar button:hover {
+    background-color: #907f69 !important;
+    border-color: #756755;
+}
+
+#tilesDrawer {
+    position: absolute;
+    background: #6d604f;
+    display: none;
+    top: 30px;
+    bottom: 0;
+    right: 0;
+    width: 150px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    transition: 0.2s;
+}
+
+#tilesDrawer.hideright {
+    right: -150px;
+}
+
+#foodcanvas.circle_cursor {
+    cursor: url(images/tools/eraser.png), auto;
+}
+
+#foodcanvas.hand_cursor {
+    cursor: pointer;
+}
+
+.antTile {
+    height: 40px;
+    cursor: pointer;
+    width: 150px;
+    background: #80715d;
+    color: white;
+    float: left;
+    text-align: left;
+    padding: 5px;
+    border-bottom: 1px solid #6d604f;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.antTile:hover {
+    background: #907f69;
+}
+
+.antTile .head {
+    float: left;
+}
+
+.antTile .name {
+    color: #ddd;
+    float: left;
+    font-size: 10px;
+    margin-left: 6px;
+    width: 100px;
+}
+
+.antTile .name.dead {
+    color: #484035;
+}
+
+.antTile .distance {
+    float: left;
+    font-size: 10px;
+    margin-left: 6px;
+    margin-top: 3px;
+}
+
+.antTile .delivered {
+    float: left;
+    font-size: 10px;
+    margin-left: 6px;
+    margin-top: 3px;
+}
+
+.antTile.hasFood:before {
+    content: '';
+    width: 10px;
+    height: 10px;
+    background: #303F9F;
+    border-radius: 5px;
+    position: absolute;
+    right: 20px;
+    top: 5px;
+}
+
+.antTile.selected,
+.atnTile.selected:hover {
+    background: #6d604f;
+    border-bottom: 1px solid #6d604f;
+}
+
+.head0 {
+    background: transparent url('../img/head.png') 0 0 no-repeat;
+    float: left;
+    width: 30px;
+    height: 30px;
+}
+
+.head1 {
+    background: transparent url('../img/head.png') -30px 0 no-repeat;
+    float: left;
+    width: 30px;
+    height: 30px;
+}
+
+.head2 {
+    background: transparent url('../img/head.png') 0 -30px no-repeat;
+    float: left;
+    width: 30px;
+    height: 30px;
+}
+
+.head0.dead,
+.head1.dead,
+.head2.dead {
+    background: transparent url('../img/head.png') -60px 0 no-repeat;
+}
+
+.energy_container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: #615647;
+}
+
+.energy {
+    background: #00bb00;
+    height: 100%;
+    width: 100%;
+    transition: 1s;
+}
+
+#config {
+    color: white;
+    font-family: 'Lato', sans-serif;
+    position: absolute;
+    top: 30px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 20;
+    text-align: left;
+    padding: 30px;
+    height: 100%;
+}
+
+#config h1 {
+    margin-top: 5%;
+    text-align: center;
+}
+
+#config label {
+    display: inline-block;
+    font-size: 14px;
+    width: 60%;
+    line-height: 25px;
+    float: left;
+}
+
+#config input[type=number] {
+    width: 10%;
+    float: right;
+}
+
+.rangeBound {
+    font-size: 10px;
+    color: #bbb;
+    float: right;
+}
+
+#titleScreen {
+    background: #466d4e;
+    color: white;
+    z-index: 1000;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+#titleScreen button,
+#config button {
+    background: transparent;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    border: 2px solid white;
+    padding: 10px 50px 10px 50px;
+    border-radius: 3px;
+    transition: 0.2s;
+    cursor: pointer;
+    box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.2);
+    display: block;
+    margin: 0 auto;
+}
+
+.center {
+    display: block;
+    margin: 0 auto;
+    width: 50%;
+    height: 30%;
+}
+
+.buttons {
+    width: 100%;
+}
+
+@media screen and (max-width: 400px) {
+    #drawer {
+        right: -100%;
+        width: 100%;
+    }
+
+    #drawer-toggle:checked ~ #drawer-toggle-label {
+        right: calc(100% - 50px);
+    }
+
+    #drawer-toggle:checked ~ .header {
+        width: 100%;
+    }
+}
+
+
+@media screen and (max-width: 767px) {
+    .loading {
+        background: #000 url('images/white-icon.png');
+        background-position: center 50%;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: 25vmin;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        position: absolute;
+        z-index: 9999;
+        float: left;
+    }
+
+    .progress {
+        width: 200px;
+        max-width: 85vw;
+        height: 4px;
+        position: absolute;
+        bottom: 35vh;
+        left: 50%;
+        border-radius: 4px;
+        background: rgba(255, 255, 255, 0.5);
+        transform: translate(-50%, -50%);
+        overflow: hidden;
+    }
+
+    .progress:after {
+        content: '';
+        display: block;
+        width: 100%;
+        height: 4px;
+        background: #fff;
+        animation: load 1s linear;
+    }
+
+    .center {
+        display: block;
+        margin: 0 auto;
+        width: 100%;
+        height: 30%;
+    }
+
+    #drawer {
+        right: -70%;
+        width: 70%;
+        background-color: #212121;
+    }
+
+    #drawer-toggle-label {
+        top: 5%;
+        right: 5%;
+    }
+
+    #drawer-toggle:checked ~ #drawer-toggle-label {
+        right: 55%;
+    }
+
+    #drawer ul a {
+        display: block;
+        padding-bottom: 20px;
+        color: #FAFAFA;
+        text-decoration: none;
+        font-family: 'Roboto', sans-serif;
+        font-size: 13px;
+    }
+
+    #drawer ul a:hover {
+        color: transparent;
+    }
+
+    #drawer-toggle:checked ~ .header {
+        width: 100%;
+    }
+
+    .panel {
+        height: 25%;
+        width: 70%;
+        bottom: 6%;
+        margin-left: 4px;
+        z-index: 10;
+    }
+
+}

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" manifest="offline.appcache">
 	<head>
     <meta charset=utf-8>
     <meta name="description" content="Ant Colony Behavior Simulator">
@@ -9,7 +9,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="fonts/lato.css">
     <link rel="stylesheet" href="fonts/roboto.css">
-    <link rel="stylesheet" href="style-main.css">
+    <link rel="stylesheet" href="simulator.css">
     <link rel="stylesheet" href="fonts/font-awesome-4.7.0/css/font-awesome.css">
 
     <!-- Favicons -->
@@ -19,170 +19,105 @@
     <link rel="manifest" href="images/favicons/manifest.json">
     <link rel="mask-icon" href="images/favicons/safari-pinned-tab.svg" color="#0e3039">
     <meta name="theme-color" content="#ffffff">
-    <style>
-        body {
-            margin: 0;
-        }
-
-        canvas {
-            width: 100%;
-            height: 100%
-        }
-    </style>
 </head>
 
 <body>
-		<script src="js/three.js"></script>
-		<script src="js/inflate.min.js"></script>
-		<script src="js/OrbitControls.js"></script>
+    <div class="loading" id="loading">
+        <div class="progress" id="progress"></div>
+    </div>
 
-		<script src="js/NURBSCurve.js"></script>
-		<script src="js/NURBSUtils.js"></script>
-		<script src="js/FBXLoader.js"></script>
+    <input type="checkbox" id="drawer-toggle" name="drawer-toggle" />
+    <label for="drawer-toggle" id="drawer-toggle-label"></label>
+    <nav id="drawer">
+        <ul>
+            <li><a href="index.html">Home Page</a></li>
+            <li><a href="about.html">About Ants</a></li>
+        </ul>
+    </nav>
 
-		<script src="js/Detector.js"></script>
-		<script src="js/stats.min.js"></script>
+    <div class="header">
+        Colony Food: <span id="food">0</span> No. of Ants: <span id="ants">0</span> Pheromone: <span id="ph">0</span>
+    </div>
+    <div class="toolbar hideleft">
+        <h2>TOOLS</h2>
+        <div class="drawMode">
+            <!--<button title="Add Ants" id="antButton" class="active"></button>
+            <button title="Add Food" id="foodButton"></button>
+            <button title="Erase Food & Barriers" class="eraserIcon" id="eraserButton"></button>-->
+            <button title="Lay Pheromone Trails" class="trailIcon" id="trailButton"></button>
+        </div>
+        <h2>SHOW</h2>
+        <div class="playControls">
+            <button title="Toggle Trails" class="active trailIcon" id="showTrailsButton"></button>
+        </div>
+        <h2>CONTROL</h2>
+        <div class="playControls">
+            <button title="Play/Pause" class="pauseIcon" id="pauseButton"></button>
+            <button title="Config" class="configIcon" id="configButton"></button>
+        </div>
+    </div>
+    <div id="tilesDrawer" class="hideright">
 
-		<script>
+    </div>
 
-			if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
+    <div class="panel" id="panel">
+        <div class="drawMode">
+            <button id="antButton" class="ant-button active"><span>Add Ants</span></button>
+            <button id="foodButton" class="food-button active"><span>Add Food</span></button>
+            <button id="squishButton" class="squish-button active"><span>Squish Ant</span></button>
+            <button id="eraserButton" class="eraser-button active"><span>Erase Food</span></button>
+        </div>
+    </div>
+    <button class="settings-button" id="settingsButton" onclick="myPanel()"></button>
 
-			var container, stats, controls;
-			var camera, scene, renderer, light;
+    <div id="scrollContainer">
+        <div class="anthill-container"><img alt="anthill" id="hill" src="images/hole-01.svg"></div>
+        <canvas id="canvas"></canvas>
+        <canvas id="overlaycanvas"></canvas>
+        <canvas id="foodcanvas"></canvas>
+    </div>
+    <div id="config">
+        <h1>Settings</h1>
+        <div class="center">
+            <label>Initial Colony Population</label>
+            <input id="initial_population" type="number" value='15' min="1" max="120">
+            <label>Initial Colony Food</label>
+            <input id="initial_colony_food" type="number" value='20' min="1" max="120">
+            <label>Map Food</label>
+            <input id="initial_map_food" type="number" value='40' min="1" max="90">
+        </div>
 
-			var clock = new THREE.Clock();
+        <div class="buttons">
+            <button id="sandbox_start">Start</button>
+        </div>
 
-			var mixers = [];
+        <div style="display: none">
+            <h2>In-Game Options</h2>
+            <label>Ant Max Energy</label>
+            <input id="max_energy" type="text" value='10000'><span class="rangeBound">(10 - 100,000)</span><br>
+            <label>Food Growth Delay</label>
+            <input id="food_growth_rate" type="text" value='20'><span class="rangeBound">(1 - 1,000)</span><br>
+            <label>Dizzy</label>
+            <input id="dizziness" type="text" value='4'><span class="rangeBound">(0 - 100)</span><br>
+            <label>Chance to turn</label>
+            <input id="chance_turn" type="text" value="14"><span class="rangeBound">(0 - 100%)</span><br>
+            <label>Chance to turn on a trail</label>
+            <input id="chance_turn_on_trail" type="text" value="7"><span class="rangeBound">(0 - 100%)</span><br>
+            <label>Chance to turn carrying food</label>
+            <input id="chance_turn_food" type="text" value='3'><span class="rangeBound">(0 - 100%)</span><br>
+        </div>
+    </div>
+    <img alt="overlay" class="overlay" src="images/overlay-vignette2.png" />
 
-			init();
+    <div class="gameover" style="display: none">
+        <h1>Game Over</h1>
+        <h2>All your ants died!</h2>
+        <p>Your Colony lasted <span id="finalTime">0</span>.</p>
+        <p>The most effient ant was <span id="efficientAntName"></span> who walked an average of <span id="efficientDistance"></span>mm to bring food home.</p>
+        <p>At it's peak, your colony had <span id="maxAnts"></span> ants.</p>
+    </div>
 
-			function init() {
-
-				container = document.createElement( 'div' );
-				document.body.appendChild( container );
-				
-				camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 5, 200 );
-
-				scene = new THREE.Scene();
-
-				// grid
-				var gridHelper = new THREE.GridHelper( 28, 28, 0x303030, 0x303030 );
-				gridHelper.position.set( 0, - 0.04, 0 );
-				scene.add( gridHelper );
-
-				// stats
-				stats = new Stats();
-				container.appendChild( stats.dom );
-
-				// model
-				var manager = new THREE.LoadingManager();
-				manager.onProgress = function( item, loaded, total ) {
-
-					console.log( item, loaded, total );
-
-				};
-
-				var onProgress = function( xhr ) {
-
-					if ( xhr.lengthComputable ) {
-
-						var percentComplete = xhr.loaded / xhr.total * 100;
-						console.log( Math.round( percentComplete, 2 ) + '% downloaded' );
-
-					}
-
-				};
-
-				var onError = function( xhr ) {
-
-					console.error( xhr );
-
-				};
-
-				var loader = new THREE.FBXLoader( manager );
-				loader.load( 'models/ant.fbx', function( object ) {
-
-					object.mixer = new THREE.AnimationMixer( object );
-					mixers.push( object.mixer );
-
-					//var action = object.mixer.clipAction( object.animations[ 0 ] );
-					//action.play();
-
-					scene.add( object );
-
-
-				}, onProgress, onError );
-
-				loader.load( 'models/ant.fbx', function( object ) {
-
-					scene.add( object );
-
-				}, onProgress, onError );
-
-				renderer = new THREE.WebGLRenderer();
-				renderer.setClearColor(0xffffff, 1);
-				renderer.setPixelRatio( window.devicePixelRatio );
-				renderer.setSize( window.innerWidth, window.innerHeight );
-				container.appendChild( renderer.domElement );
-
-				// controls, camera
-				controls = new THREE.OrbitControls( camera, renderer.domElement );
-				controls.target.set( 0, 12, 0 );
-				camera.position.set( 2, 18, 28 );
-				controls.update();
-
-				window.addEventListener( 'resize', onWindowResize, false );
-
-				light = new THREE.HemisphereLight(0xffffff, 0x444444, 1.0);
-				light.position.set(0, 1, 0);
-				scene.add(light);
-
-				light = new THREE.DirectionalLight(0xffffff, 1.0);
-				light.position.set(0, 1, 0);
-				scene.add(light);
-
-				animate();
-
-			}
-
-			function onWindowResize() {
-
-				camera.aspect = window.innerWidth / window.innerHeight;
-				camera.updateProjectionMatrix();
-
-				renderer.setSize( window.innerWidth, window.innerHeight );
-
-			}
-
-			//
-
-			function animate() {
-
-				requestAnimationFrame( animate );
-
-				if ( mixers.length > 0 ) {
-
-					for ( var i = 0; i < mixers.length; i ++ ) {
-
-						mixers[ i ].update( clock.getDelta() );
-
-					}
-
-				}
-
-				stats.update();
-
-				render();
-
-			}
-
-			function render() {
-
-				renderer.render( scene, camera );
-
-			}
-
-		</script>
-
-	</body>
+    <div id="debug"></div>
+    <script src="simulator.js"></script>
+</body>
 </html>
